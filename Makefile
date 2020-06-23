@@ -8,7 +8,7 @@ SHELL	:= /bin/bash
 all:	jonesforth
 
 jonesforth: jonesforth.S
-	gcc -m32 -nostdlib -static -Wl,-Ttext,0 $(BUILD_ID_NONE) -o $@ $<
+	gcc -g -m32 -nostdlib -static $(BUILD_ID_NONE) -o $@ $<
 
 run:
 	cat jonesforth.f $(PROG) - | ./jonesforth
@@ -42,9 +42,3 @@ run_perf_dupdrop: jonesforth
 
 .SUFFIXES: .f .test
 .PHONY: test check run run_perf_dupdrop
-
-remote:
-	scp jonesforth.S jonesforth.f rjones@oirase:Desktop/
-	ssh rjones@oirase sh -c '"rm -f Desktop/jonesforth; \
-	  gcc -m32 -nostdlib -static -Wl,-Ttext,0 -o Desktop/jonesforth Desktop/jonesforth.S; \
-	  cat Desktop/jonesforth.f - | Desktop/jonesforth arg1 arg2 arg3"'

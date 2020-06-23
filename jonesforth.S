@@ -1151,7 +1151,7 @@ var_\name :
 */
 
 //#include <asm-i386/unistd.h>	// you might need this instead
-#include <asm/unistd.h>
+#include <i386-linux-gnu/asm/unistd.h>
 
 	.macro defconst name, namelen, flags=0, label, value
 	defcode \name,\namelen,\flags,\label
